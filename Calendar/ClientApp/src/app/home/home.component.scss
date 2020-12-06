@@ -1,0 +1,90 @@
+@import '../../scss';
+
+.home_page_container {
+    margin: auto;
+    width: 1200px;
+
+    .handler_container {
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 150px;
+    }
+
+    .home_page_description_container {
+        width: 100%;
+        height: 563px;
+        background-image: url("../../content/images/home_page.png");
+        margin-bottom: 80px;
+
+        box-sizing: border-box;
+        padding-top: 120px;
+        padding-left: 50px;
+
+        .home_page_description {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+
+            .description_title {
+                font-family: Roboto;
+                font-size: 56px;
+                font-weight: 200;
+                color: #FFFFFF;
+                margin-bottom: 45px;
+            }
+
+            .description_content {
+                font-family: Roboto;
+                font-size: 20px;
+                line-height: 30px;
+                font-weight: 200;
+                color: #FFFFFF;
+                word-wrap: break-word;
+                margin-bottom: 25px;
+            }
+
+            .button_container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 45px;
+
+                .register_button {
+                    width: 250px;
+                    height: 40px;
+                    border-radius: 4px;
+
+                    background-color: #E0E1FF;
+
+                    font-family: Roboto;
+                    font-size: 18px;
+                    color: #252525;
+                }
+            }
+        }
+    }
+
+    .advantages_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 36px;
+
+        .advantage_item {
+
+            .advantage_icon {
+                margin-bottom: 15px;
+
+                .mat-icon {
+                    font-size: 48px;
+                }
+            }
+
+            .advantage_title {
+                font-family: Roboto;
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
