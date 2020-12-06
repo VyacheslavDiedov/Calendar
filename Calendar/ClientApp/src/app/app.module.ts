@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent} from './header/header.component';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -18,11 +20,13 @@ import {MatDialogModule} from '@angular/material/dialog';
         HomeComponent,
         TestPageComponent,
         HeaderComponent,
-        RegisterDialogComponent
+        RegisterDialogComponent,
+        LoginDialogComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        FormsModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
             { path: 'test', component: TestPageComponent }

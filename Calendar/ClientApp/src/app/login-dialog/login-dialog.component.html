@@ -1,0 +1,22 @@
+<div class="dialog_window">
+    <div class="close_window_button" mat-button [mat-dialog-close]="">
+        <mat-icon>clear</mat-icon>
+    </div>
+    <div class="dialog_container">
+        <p class="dialog_title" mat-dialog-title>Вхід</p>
+
+        <span>e-mail</span>
+        <input type="text" [(ngModel)]="userLoginInput">
+
+        <span>Пароль</span>
+        <input type="password" [(ngModel)]="userPasswordInput">
+
+        <div class="button_container">
+            <button class="register_button" (click)="loginUser()">Увійти</button>
+            <button class="cancel_button" mat-button [mat-dialog-close]="">Відмінити</button>
+        </div>
+
+        <p class="if_registered">Не зареєстровані?<a routerLink="/register"> Зареєструйтесь</a></p>
+
+    </div>
+</div>

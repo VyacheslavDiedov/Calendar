@@ -12,26 +12,26 @@
 
         <span>Ім'я</span>
         <span class="red_star">*</span>
-        <input type="text" >
+        <input type="text" [(ngModel)]="userFirstNameInput">
 
         <span>Прізвище</span>
         <span class="red_star">*</span>
-        <input type="text" >
+        <input type="text" [(ngModel)]="userLastNameInput">
 
         <span>e-mail</span>
         <span class="red_star">*</span>
-        <input type="text" >
+        <input type="text" [(ngModel)]="userEMailInput">
 
-        <span>Організація</span>
+        <span>Телефон</span>
         <span class="red_star">*</span>
-        <input type="text" >
+        <input type="text" [(ngModel)]="userPhoneInput">
 
         <span>Пароль</span>
         <span class="red_star">*</span>
-        <input type="password" >
+        <input type="password" [(ngModel)]="passwordInput">
 
         <div class="button_container">
-            <button class="register_button">Зареєструватись</button>
+            <button class="register_button" (click)="registerUser()">Зареєструватись</button>
             <button class="cancel_button" mat-button [mat-dialog-close]="">Відмінити</button>
         </div>
 
