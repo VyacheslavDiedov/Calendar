@@ -18,7 +18,7 @@ export class LoginDialogComponent {
     public userLoginInput: string = '';
     public userPasswordInput: string = '';
 
-    constructor(public dialogRef: MatDialogRef<LoginDialogComponent>) { }
+    constructor(public dialogRef: MatDialogRef<LoginDialogComponent >) { }
 
     onNoClick(): void {
         this.dialogRef.close();
