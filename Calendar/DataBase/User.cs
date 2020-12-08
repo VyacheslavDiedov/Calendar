@@ -7,12 +7,14 @@ namespace Calendar.DataBase
         [Key]
         public int UserID { get; set; }
         [Required]
-        public string UserName { get; set; }
+        public string UserFirstName { get; set; }
+        [Required]
+        public string UserLastName { get; set; }
         [Required]
         public string UserEMail { get; set; }
-        public string OrganizationName { get; set; }
+        [Required]
+        public string UserPhone { get; set; }
         [Required]
         public string UserPassword { get; set; }
-        public string Token { get; set; }
     }
 }
