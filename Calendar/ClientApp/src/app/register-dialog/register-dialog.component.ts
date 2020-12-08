@@ -1,6 +1,15 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {UserData} from '../home/home.component';
+import {MatDialogRef} from '@angular/material/dialog';
+
+export class UserData {
+    constructor(
+        public userFirstName: string = '',
+        public userLastName: string = '',
+        public userEMail: string = '',
+        public userPhone: string = '',
+        public password: string = ''
+    ) { }
+}
 
 @Component({
     selector: 'app-register-dialog',
