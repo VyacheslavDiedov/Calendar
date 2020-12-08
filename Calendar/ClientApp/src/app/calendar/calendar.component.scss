@@ -28,9 +28,17 @@
         }
 
         .profile_button_container {
-            width: 30px;
+            //width: 30px;
             height: 30px;
             margin-right: 30px;
+            display: flex;
+            flex-direction: row;
+
+            .user_name {
+                margin-right: 20px;
+                font-weight: 200;
+                color: #FFFFFF;
+            }
 
             .profile_button {
                 margin-right: 30px;
@@ -56,6 +64,7 @@
     .calendar_sidebar {
         grid-column: col-start / span 3;
         background-color: #D4D4D4;
+        min-width: 270px;
         height: 800px;
 
         .add_event_button_container {
