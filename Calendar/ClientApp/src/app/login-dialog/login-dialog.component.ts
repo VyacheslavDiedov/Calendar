@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export class LoginData {
     constructor(
@@ -18,7 +18,7 @@ export class LoginDialogComponent {
     public userLoginInput: string = '';
     public userPasswordInput: string = '';
 
-    constructor(public dialogRef: MatDialogRef<LoginDialogComponent >) { }
+    constructor(public dialogRef: MatDialogRef<LoginDialogComponent>) { }
 
     onNoClick(): void {
         this.dialogRef.close();
