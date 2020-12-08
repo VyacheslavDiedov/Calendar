@@ -62,6 +62,27 @@
                     cursor: pointer;
                 }
             }
+
+            // TODO Remove after debug
+            .button_container_test {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 15px;
+
+                .register_button {
+                    width: 250px;
+                    height: 40px;
+                    border-radius: 4px;
+
+                    background-color: #E0E1FF;
+
+                    font-family: Roboto;
+                    font-size: 18px;
+                    color: #252525;
+                    cursor: pointer;
+                }
+            }
         }
     }
 
