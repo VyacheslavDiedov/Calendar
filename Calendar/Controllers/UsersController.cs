@@ -5,6 +5,7 @@ using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Calendar.ViewModels;
 
 namespace Calendar.Controllers
 {
@@ -67,20 +68,20 @@ namespace Calendar.Controllers
         /// </summary>
         /// <param name="loginData">User login data</param>
         /// <returns>response status "Ok" and user or status "BadRequest" with error message</returns>
-        //[HttpPost("Login")]
-        //public IActionResult UserLogin([FromBody] LoginData loginData)
-        //{
-        //    User user = _context.Users.
-        //        Where(us => us.UserEMail.Equals(loginData.UserLogin) 
-        //                    && us.UserPassword.Equals(loginData.UserPassword))
-        //        .FirstOrDefault();
+        [HttpPost("Login")]
+        public IActionResult UserLogin([FromBody] LoginData loginData)
+        {
+            User user = _context.Users.
+                Where(us => us.UserEMail.Equals(loginData.UserLogin)
+                            && us.UserPassword.Equals(loginData.UserPassword))
+                .FirstOrDefault();
 
-        //    if (user != null)
-        //    {
-        //        return Ok(user);
-        //    }
+            if (user != null)
+            {
+                return Ok(user);
+            }
 
-        //    return BadRequest("Can't find user with such login and password");
-        //}
+            return BadRequest("Can't find user with such login and password");
+        }
     }
 }

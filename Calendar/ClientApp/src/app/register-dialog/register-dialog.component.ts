@@ -1,15 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
-
-export class UserData {
-    constructor(
-        public userFirstName: string = '',
-        public userLastName: string = '',
-        public userEMail: string = '',
-        public userPhone: string = '',
-        public password: string = ''
-    ) { }
-}
+import {CalendarApiService} from "../../service/calendar-api.service";
+import {UserData} from "../../models/user-data";
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 
 @Component({
     selector: 'app-register-dialog',
@@ -24,10 +17,12 @@ export class RegisterDialogComponent {
     public userPhoneInput: string = '';
     public passwordInput: string = '';
 
-    constructor(public dialogRef: MatDialogRef<RegisterDialogComponent>) { }
+    constructor(public dialogRefRegister: MatDialogRef<RegisterDialogComponent>,
+              //  public dialogRefLogin: MatDialogRef<LoginDialogComponent>,
+                public APIService: CalendarApiService) {}
 
     onNoClick(): void {
-        this.dialogRef.close();
+        this.dialogRefRegister.close();
     }
 
     registerUser(): void {
@@ -40,7 +35,7 @@ export class RegisterDialogComponent {
         );
 
         console.log(userToRegister); // TODO Provide API call to register user
-
-        this.dialogRef.close();
+        this.APIService.AddUser(userToRegister).subscribe();
+        this.dialogRefRegister.close();
     }
 }

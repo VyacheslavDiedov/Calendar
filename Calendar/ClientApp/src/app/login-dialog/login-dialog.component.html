@@ -11,6 +11,8 @@
         <span>Пароль</span>
         <input type="password" [(ngModel)]="userPasswordInput">
 
+        <div class="if_error" *ngIf="error">Невірний логін або пароль</div>
+
         <div class="button_container">
             <button class="register_button" (click)="loginUser()">Увійти</button>
             <button class="cancel_button" mat-button [mat-dialog-close]="">Відмінити</button>

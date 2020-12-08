@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-
-export class LoginData {
-    constructor(
-        public userLogin: string,
-        public userPassword: string
-    ) { }
-}
+import {CalendarApiService} from "../../service/calendar-api.service";
+import {UserData} from "../../models/user-data";
+import { LoginData } from 'src/models/login-data';
 
 @Component({
     selector: 'app-login-dialog',
@@ -17,8 +13,9 @@ export class LoginDialogComponent {
 
     public userLoginInput: string = '';
     public userPasswordInput: string = '';
+    public error: boolean = false;
 
-    constructor(public dialogRef: MatDialogRef<LoginDialogComponent>) { }
+    constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, public APIService: CalendarApiService) { }
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -32,6 +29,19 @@ export class LoginDialogComponent {
 
         console.log(userToLogin); // TODO Provide API call to login user
 
-        this.dialogRef.close();
+        let user: UserData = null;
+
+        this.APIService.UserLogin(userToLogin).subscribe(response => {
+                user = response;
+                localStorage.setItem("currentUser", JSON.stringify(user));
+                //this.router.navigate(['/user_page']);
+                this.dialogRef.close();
+            },
+            error => {
+                localStorage.removeItem("currentUser");
+                this.error = true;
+            });
+
+
     }
 }

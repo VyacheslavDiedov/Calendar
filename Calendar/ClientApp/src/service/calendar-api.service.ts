@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {basicUrl} from './basicUrl';
 import {UserData} from '../models/user-data';
+import {LoginData} from "../models/login-data";
 
 @Injectable({
     providedIn: 'root'
@@ -38,6 +39,25 @@ export class CalendarApiService {
         // call to API
         let result: any = null;
         return this.http.post(basicUrl.apiUrl + url, userToAdd, { observe: 'response' })
+            .pipe(
+                map(
+                    response => {
+                        result = response.body;
+                        return result;
+                    },
+                    error => {
+                        return new Error(error);
+                    }
+                ));
+    }
+
+    public UserLogin(userToLogin: LoginData): Observable<UserData> {
+        // get API URL
+        const url: string = '/api/Calendar/Users/Login';
+
+        // call to API
+        let result: any = null;
+        return this.http.post(basicUrl.apiUrl + url, userToLogin, { observe: 'response' })
             .pipe(
                 map(
                     response => {

@@ -13,7 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
-
+import { HttpClientModule }   from '@angular/common/http';
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,7 +32,8 @@ import { FooterComponent } from './footer/footer.component';
         ]),
         MatToolbarModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent]
