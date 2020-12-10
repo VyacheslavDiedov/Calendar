@@ -18,7 +18,7 @@ export class HomeComponent {
     public openRegisterDialog(): void {
         const dialogRef = this.dialog.open(RegisterDialogComponent, {
             width: '450px',
-            height: '665px'
+            height: '620px'
         });
 
         dialogRef.afterClosed().subscribe();
@@ -27,7 +27,7 @@ export class HomeComponent {
     public openLoginDialog(): void {
         const dialogRef = this.dialog.open(LoginDialogComponent, {
             width: '450px',
-            height: '405px'
+            height: '370px'
         });
 
         dialogRef.afterClosed().subscribe();
