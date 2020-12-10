@@ -7,18 +7,23 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent} from './header/header.component';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+
 import { HttpClientModule }   from '@angular/common/http';
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         HeaderComponent,
+        CalendarComponent,
         RegisterDialogComponent,
         LoginDialogComponent,
         FooterComponent
@@ -28,10 +33,15 @@ import { HttpClientModule }   from '@angular/common/http';
         BrowserAnimationsModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' }
+            {path: '', redirectTo: '/home', pathMatch: 'full'},
+            {path: 'home', component: HomeComponent},
+            {path: 'calendar', component: CalendarComponent}
         ]),
         MatToolbarModule,
         MatIconModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatMenuModule,
         MatDialogModule,
         HttpClientModule
     ],
