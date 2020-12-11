@@ -51,6 +51,25 @@ export class CalendarApiService {
                 ));
     }
 
+    public EditUser(userToEdit: UserData): Observable<UserData> {
+        // get API URL
+        const url: string = '/api/Calendar/Users';
+
+        // call to API
+        let result: any = null;
+        return this.http.put(basicUrl.apiUrl + url, userToEdit, { observe: 'response' })
+            .pipe(
+                map(
+                    response => {
+                        result = response.body;
+                        return result;
+                    },
+                    error => {
+                        return new Error(error);
+                    }
+                ));
+    }
+
     public UserLogin(userToLogin: LoginData): Observable<UserData> {
         // get API URL
         const url: string = '/api/Calendar/Users/Login';

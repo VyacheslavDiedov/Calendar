@@ -3,7 +3,7 @@
         <mat-icon>clear</mat-icon>
     </div>
     <div class="dialog_container">
-        <p class="dialog_title" mat-dialog-title>Реєстрація</p>
+        <p class="dialog_title" mat-dialog-title>Редагування користувача</p>
 
         <div class="necessary_fields">
             <span class="red_star">*</span>
@@ -26,14 +26,8 @@
         <span class="red_star">*</span>
         <input type="text" [(ngModel)]="userPhoneInput">
 
-        <span>Пароль</span>
-        <span class="red_star">*</span>
-        <input type="password" [(ngModel)]="passwordInput">
-
-        <div class="if_error" *ngIf="error">Користувач з таким e-mail існує</div>
-
         <div class="button_container">
-            <button class="register_button" (click)="registerUser()">Зареєструватись</button>
+            <button class="register_button" (click)="editUser()">Редагувати</button>
             <button class="cancel_button" mat-button [mat-dialog-close]="">Відмінити</button>
         </div>
 

@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { HttpClientModule }   from '@angular/common/http';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,7 +27,8 @@ import { HttpClientModule }   from '@angular/common/http';
         CalendarComponent,
         RegisterDialogComponent,
         LoginDialogComponent,
-        FooterComponent
+        FooterComponent,
+        EditUserDialogComponent
     ],
     imports: [
         BrowserModule,

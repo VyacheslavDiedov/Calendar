@@ -57,10 +57,15 @@ namespace Calendar.Controllers
         [HttpPost("User")]
         public async Task<ActionResult> AddUser([FromBody] User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            if (_context.Users.FirstOrDefault(us => us.UserEMail.Equals(user.UserEMail)) == null)
+            {
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
 
-            return Ok($"User with name \"{user.UserFirstName+ " " + user.UserLastName}\" added");
+                return Ok(user);
+            }
+
+            return BadRequest($"User with email {user.UserEMail} is exist");
         }
 
         /// <summary>
@@ -82,6 +87,24 @@ namespace Calendar.Controllers
             }
 
             return BadRequest("Can't find user with such login and password");
+        }
+
+        /// <summary>
+        /// Change defined User in DB
+        /// </summary>
+        /// <param name="user">User to update</param>
+        /// <returns>response status  "BadRequest" if  if User to change is null</returns>
+        [HttpPut]
+        public async Task<IActionResult> PutUser([FromBody] User user)
+        {
+            if (user == null)
+            {
+                return BadRequest($"Inputed User's data is null");
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok($"Inputed User's data is modified");
         }
     }
 }
