@@ -11,17 +11,3 @@
   font-style: normal;
 }
 
-//containers
-.outer_container_wide {
-    width: 1272px; //1200 + 2 * 36 (for 36px paddings)
-    min-width: 961px;
-    padding: 0 36px;
-    box-sizing: border-box;
-}
-
-//width is calculated as 1200px with 36px padding from both sides plus additional 20px for scrollbar (1200 + 2 * 36 + 20 = 1292)
-@media (max-width: 1292px) {
-    .outer_container_wide {
-        width: 100%;
-    }
-}

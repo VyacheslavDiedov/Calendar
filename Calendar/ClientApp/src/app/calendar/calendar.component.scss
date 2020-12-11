@@ -2,6 +2,7 @@
     background-color: #323580;
     height: 80px;
     position: fixed;
+    z-index: 1;
 
     .header_container {
         margin: auto;
@@ -56,46 +57,9 @@
     height: 80px;
 }
 
-.calendar_page_container {
-    display: grid;
-    grid-template-columns: repeat(12, [col-start] 1fr);
-    grid-gap: 36px;
-
-    .calendar_sidebar {
-        grid-column: col-start / span 3;
-        background-color: #D4D4D4;
-        min-width: 270px;
-        height: 800px;
-
-        .add_event_button_container {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-
-            .add_event_button {
-                margin-top: 25px;
-                width: 220px;
-                height: 50px;
-                border-radius: 25px;
-                background-color: #323580;
-                //background-image: url("../../content/svg/add_icon.svg");
-                //background-repeat: no-repeat;
-                //background-size: 20px 20px;
-                //background-position: center left 20px;
-                font-family: Montserrat;
-                font-size: 20px;
-                color: #FFFFFF;
-                cursor: pointer;
-
-                .button_content {
-                    //margin-left: 30px;
-                }
-            }
-        }
-    }
-
-    .calendar_main_container {
-        grid-column: col-start 4 / span 9;
-    }
+.syncfusion_calendar_container {
+    width: 100%;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 25px;
 }
