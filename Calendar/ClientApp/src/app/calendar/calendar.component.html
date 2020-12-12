@@ -4,7 +4,7 @@
             <span class="header_title">Calendar</span>
         </div>
         <div class="profile_button_container">
-            <span class="user_name">{{currentUser.userFirstName + " " + currentUser.userLastName}}</span>
+            <!--<span class="user_name">{{currentUser.userFirstName + " " + currentUser.userLastName}}</span>-->
             <mat-icon class="profile_button" [matMenuTriggerFor]="menu">perm_identity</mat-icon>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openEditUserDialog()" routerLinkActive="active">
