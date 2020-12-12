@@ -17,7 +17,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
       this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
       if( this.currentUser == null){
-          //this.router.navigate(['']);
+          this.router.navigate(['']);
       }
   }
 

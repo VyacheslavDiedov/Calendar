@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
 
     ngOnInit(): void {
         if(JSON.parse(localStorage.getItem("currentUser")) != null){
-            //this.router.navigate(['/calendar']);
+            this.router.navigate(['/calendar']);
         }
     }
 
