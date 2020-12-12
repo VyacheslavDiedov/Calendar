@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
     AgendaService,
     DayService,
@@ -7,7 +7,8 @@ import {
     TimelineMonthService,
     TimelineViewsService,
     WeekService,
-    WorkWeekService
+    WorkWeekService,
+    YearService
 } from '@syncfusion/ej2-angular-schedule';
 
 @Component({
@@ -22,14 +23,9 @@ import {
         AgendaService,
         MonthAgendaService,
         TimelineViewsService,
-        TimelineMonthService
+        TimelineMonthService,
+        YearService
     ]
 })
-export class ScheduleComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit(): void {
-    }
-
+export class ScheduleComponent {
 }

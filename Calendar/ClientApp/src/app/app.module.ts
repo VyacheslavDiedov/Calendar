@@ -29,7 +29,8 @@ import {
     TimelineMonthService,
     TimelineViewsService,
     WeekService,
-    WorkWeekService
+    WorkWeekService,
+    YearService
 } from '@syncfusion/ej2-angular-schedule';
 
 
@@ -69,7 +70,8 @@ import {
         AgendaService,
         MonthAgendaService,
         TimelineViewsService,
-        TimelineMonthService
+        TimelineMonthService,
+        YearService
     ],
     bootstrap: [AppComponent]
 })
