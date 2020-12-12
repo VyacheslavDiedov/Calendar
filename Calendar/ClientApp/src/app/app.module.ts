@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FooterComponent } from './footer/footer.component';
-import { ScheduleComponent } from './schedule/schedule.component';
+import {ScheduleComponent} from './schedule/schedule.component';
 
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -33,7 +34,6 @@ import {
     YearService
 } from '@syncfusion/ej2-angular-schedule';
 
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -41,6 +41,7 @@ import {
         CalendarComponent,
         RegisterDialogComponent,
         LoginDialogComponent,
+        EditUserDialogComponent,
         FooterComponent,
         ScheduleComponent
     ],

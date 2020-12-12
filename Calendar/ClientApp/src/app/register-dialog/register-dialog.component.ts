@@ -3,6 +3,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {CalendarApiService} from "../../service/calendar-api.service";
 import {UserData} from "../../models/user-data";
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-register-dialog',
@@ -16,10 +17,11 @@ export class RegisterDialogComponent {
     public userEMailInput: string = '';
     public userPhoneInput: string = '';
     public passwordInput: string = '';
+    public error: boolean = false;
 
     constructor(public dialogRefRegister: MatDialogRef<RegisterDialogComponent>,
-              //  public dialogRefLogin: MatDialogRef<LoginDialogComponent>,
-                public APIService: CalendarApiService) {}
+                public APIService: CalendarApiService,
+                private router: Router) {}
 
     onNoClick(): void {
         this.dialogRefRegister.close();
@@ -34,8 +36,17 @@ export class RegisterDialogComponent {
             this.passwordInput
         );
 
-        console.log(userToRegister); // TODO Provide API call to register user
-        this.APIService.AddUser(userToRegister).subscribe();
-        this.dialogRefRegister.close();
+        this.APIService.AddUser(userToRegister).subscribe(
+            response => {
+                let user: UserData = response;
+                localStorage.setItem("currentUser", JSON.stringify(user));
+                this.router.navigate(['/calendar']);
+                this.dialogRefRegister.close();
+            },
+            error => {
+                localStorage.removeItem("currentUser");
+                this.error = true;
+            }
+        );
     }
 }
