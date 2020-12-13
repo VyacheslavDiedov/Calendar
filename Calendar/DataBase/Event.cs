@@ -13,10 +13,10 @@ namespace Calendar.DataBase
         [Required]
         public DateTime StartEventDateTime { get; set; }
         public DateTime EndEventDateTime { get; set; }
-        public bool IsImportant { get; set; }
+        public bool IsAllDay { get; set; }
         public int EventCategoryId { get; set; }
         public bool Repeat { get; set; }
         [Required]
-        public int UserId { get; set; }
+        public int UserID { get; set; }
     }
 }

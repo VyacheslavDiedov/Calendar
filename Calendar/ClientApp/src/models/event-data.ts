@@ -1,11 +1,13 @@
 
 export class EventData {
     constructor(
-        public Id: number,
-        public Subject: string,
-        public StartTime: Date,
-        public EndTime: Date,
+        public eventId: number,
+        public EventName: string,
+        public StartEventDateTime: Date,
+        public EndEventDateTime: Date,
         public IsAllDay: boolean,
-        public RecurrenceRule: string
+        public RecurrenceRule: string,
+        public EventDescription: string,
+        public UserID: number
     ){}
 }
