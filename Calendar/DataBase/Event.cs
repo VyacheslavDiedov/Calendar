@@ -11,9 +11,11 @@ namespace Calendar.DataBase
         public string EventName { get; set; }
         public string EventDescription { get; set; }
         [Required]
-        public DateTime EventDateTime { get; set; }
+        public DateTime StartEventDateTime { get; set; }
+        public DateTime EndEventDateTime { get; set; }
         public bool IsImportant { get; set; }
         public int EventCategoryId { get; set; }
+        public bool Repeat { get; set; }
         [Required]
         public int UserId { get; set; }
     }

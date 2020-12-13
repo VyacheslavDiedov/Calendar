@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
 import { MatDialog } from '@angular/material/dialog';
 import {EditUserDialogComponent} from "../edit-user-dialog/edit-user-dialog.component";
 
