@@ -1,1 +1,9 @@
-<ejs-schedule  (actionBegin)="onActionBegin($event)" > </ejs-schedule>
+<div  *ngIf="!isLoadedData; else uploadedData" >
+    <mat-spinner></mat-spinner>
+</div>
+
+<ng-template #uploadedData>
+    <ejs-schedule  (actionBegin)="onActionBegin($event)"
+                   [selectedDate]="selectedDate" [eventSettings]="eventSettings"  > </ejs-schedule>
+</ng-template>
+

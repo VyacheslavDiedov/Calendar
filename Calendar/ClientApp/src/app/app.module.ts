@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {
     ScheduleModule,
@@ -33,6 +34,7 @@ import {
     WorkWeekService,
     YearService
 } from '@syncfusion/ej2-angular-schedule';
+
 
 @NgModule({
     declarations: [
@@ -61,7 +63,8 @@ import {
         MatMenuModule,
         MatDialogModule,
         HttpClientModule,
-        ScheduleModule
+        ScheduleModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         DayService,

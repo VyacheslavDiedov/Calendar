@@ -11,8 +11,8 @@ export class EventService {
     constructor(private http: HttpClient) { }
 
     // tslint:disable-next-line:typedef
-     getEvents() {
-         return this.http.get(basicUrl.apiUrl + this.url);
+     getEvents(userID: number) {
+         return this.http.get(basicUrl.apiUrl + this.url + '/' + 5);
      }
 
     // tslint:disable-next-line:typedef

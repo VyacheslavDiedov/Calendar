@@ -11,3 +11,14 @@ export class EventData {
         public UserID: number
     ){}
 }
+
+export class EventDataManager {
+    constructor(
+        public Id: number = 0,
+        public eventName: string = '',
+        public startEventDateTime: Date = null,
+        public endEventDateTime: Date = null,
+        public IsAllDay: boolean = false,
+        public Description: string = '',
+    ){}
+}
