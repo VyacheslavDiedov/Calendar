@@ -10,23 +10,21 @@ export class EventService {
 
     constructor(private http: HttpClient) { }
 
-    // tslint:disable-next-line:typedef
      getEvents(userID: number) {
          return this.http.get(basicUrl.apiUrl + this.url + '/' + userID);
      }
 
-    // tslint:disable-next-line:typedef
+
     createEvent(event: EventData) {
-        debugger
          const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
          return this.http.post(basicUrl.apiUrl + this.url, JSON.stringify(event), {headers: myHeaders});
      }
-    // tslint:disable-next-line:typedef
+
     updateEvent(event: EventData) {
         const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
         return this.http.put(basicUrl.apiUrl + this.url, JSON.stringify(event), {headers: myHeaders});
     }
-    // tslint:disable-next-line:typedef
+
     deleteEvent(id: number) {
         return this.http.delete(basicUrl.apiUrl + this.url + '/' + id);
     }
