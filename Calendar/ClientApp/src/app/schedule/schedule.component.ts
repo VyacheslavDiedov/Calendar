@@ -9,10 +9,17 @@ import {
     WeekService,
     WorkWeekService,
     YearService,
+    DragAndDropService,
     EventSettingsModel
 } from '@syncfusion/ej2-angular-schedule';
 import {EventData, EventDataManager} from '../../models/event-data';
 import {EventService} from '../../service/event-api.service';
+import Eventapiservice =
+    require("../../../../source/repos/MyCalendar/Calendar/ClientApp/src/service/event-api.service");
+import EventService = Eventapiservice.EventService;
+import Eventdata = require("../../../../source/repos/MyCalendar/Calendar/ClientApp/src/models/event-data");
+import EventData = Eventdata.EventData;
+import EventDataManager = Eventdata.EventDataManager;
 
 @Component({
     selector: 'app-schedule',
@@ -28,6 +35,7 @@ import {EventService} from '../../service/event-api.service';
         TimelineViewsService,
         TimelineMonthService,
         YearService,
+        DragAndDropService,
         EventService
     ]
 })
