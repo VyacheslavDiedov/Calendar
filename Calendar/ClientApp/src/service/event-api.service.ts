@@ -12,11 +12,12 @@ export class EventService {
 
     // tslint:disable-next-line:typedef
      getEvents(userID: number) {
-         return this.http.get(basicUrl.apiUrl + this.url + '/' + 5);
+         return this.http.get(basicUrl.apiUrl + this.url + '/' + userID);
      }
 
     // tslint:disable-next-line:typedef
     createEvent(event: EventData) {
+        debugger
          const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
          return this.http.post(basicUrl.apiUrl + this.url, JSON.stringify(event), {headers: myHeaders});
      }

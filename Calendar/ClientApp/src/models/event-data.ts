@@ -2,23 +2,23 @@
 export class EventData {
     constructor(
         public eventId: number,
-        public EventName: string,
-        public StartEventDateTime: Date,
-        public EndEventDateTime: Date,
-        public IsAllDay: boolean,
-        public RecurrenceRule: string,
-        public EventDescription: string,
-        public UserID: number
+        public eventName: string,
+        public startEventDateTime: Date,
+        public endEventDateTime: Date,
+        public isAllDay: boolean,
+        public recurrenceRule: string,
+        public eventDescription: string,
+        public userID: number
     ){}
 }
 
 export class EventDataManager {
     constructor(
-        public Id: number = 0,
-        public eventName: string = '',
-        public startEventDateTime: Date = null,
-        public endEventDateTime: Date = null,
-        public IsAllDay: boolean = false,
-        public Description: string = '',
+        public Id: number,
+        public Subject: string,
+        public StartTime: Date,
+        public EndTime: Date,
+        public IsAllDay: boolean,
+        public Description: string
     ){}
 }

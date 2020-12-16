@@ -27,47 +27,36 @@ namespace Calendar.Controllers
         [HttpGet("{userID:int}")]
         public async Task<ActionResult<List<GetEvent>>> GetEvents(int userID)
         {
-            var allEvents = await _context.Events.Where(e => e.UserID == userID).ToListAsync();
-            if (allEvents != null)
+            var events = await _context.Events.Where(e => e.UserID == userID).ToListAsync();
+            if (events != null)
             {
-                var events = new List<GetEvent>();
-                foreach (var myEvent in allEvents)
-                {
-                    var eventModel = new GetEvent()
-                    {
-                        Id = myEvent.EventId,
-                        Subject = myEvent.EventName,
-                        StartTime = myEvent.StartEventDateTime,
-                        EndTime = myEvent.EndEventDateTime,
-                        Description = myEvent.EventDescription,
-                        IsAllDay = myEvent.IsAllDay,
-
-                    };
-                    events.Add(eventModel);
-                }
                 return Ok(events);
-            }
-
+            };
             return NotFound("Events didn't found");
         }
 
-        ///// <summary>
-        ///// Get Event by Id from DB
-        ///// </summary>
-        ///// <param name="id">Event Id</param>
-        ///// <returns>response status "OK" and Event or status "NotFound" and error message</returns>
-        //[HttpGet("{id:int}")]
-        //public async Task<ActionResult> GetEvent(int id)
-        //{
-        //    var myEvent = await _context.Events.FindAsync(id);
+        /// <summary>
+        /// Add new Event to DB
+        /// </summary>
+        /// <param name="myEvent">Event to add</param>
+        /// <returns>response status "Ok"</returns>
+        [HttpPost]
+        public async Task<ActionResult> PostEvent([FromBody] Event myEvent)
+        {
+            var newEvent = new Event();
+            newEvent.EventId = myEvent.EventId;
+            newEvent.EventName = myEvent.EventName;
+            newEvent.StartEventDateTime = Convert.ToDateTime(myEvent.StartEventDateTime).ToLocalTime();
+            newEvent.EndEventDateTime = Convert.ToDateTime(myEvent.EndEventDateTime).ToLocalTime();
+            newEvent.EventDescription = myEvent.EventDescription;
+            newEvent.IsAllDay = myEvent.IsAllDay;
+            newEvent.Repeat = myEvent.Repeat;
+            newEvent.UserID = myEvent.UserID;
 
-        //    if (myEvent == null)
-        //    {
-        //        return NotFound($"Could not found Event with Id={id}");
-        //    }
-
-        //    return Ok(myEvent);
-        //}
+            _context.Events.Add(newEvent);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
 
         /// <summary>
         /// Change defined by Id Event in DB
@@ -82,8 +71,16 @@ namespace Calendar.Controllers
             {
                 return BadRequest($"Inputed Topic's data is null");
             }
-
-            _context.Entry(myEvent).State = EntityState.Modified;
+            var putEvent = new Event();
+            putEvent.EventId = myEvent.EventId;
+            putEvent.EventName = myEvent.EventName;
+            putEvent.StartEventDateTime = Convert.ToDateTime(myEvent.StartEventDateTime).ToLocalTime();
+            putEvent.EndEventDateTime = Convert.ToDateTime(myEvent.EndEventDateTime).ToLocalTime();
+            putEvent.EventDescription = myEvent.EventDescription;
+            putEvent.IsAllDay = myEvent.IsAllDay;
+            putEvent.Repeat = myEvent.Repeat;
+            putEvent.UserID = myEvent.UserID;
+            _context.Entry(putEvent).State = EntityState.Modified;
 
             try
             {
@@ -97,31 +94,7 @@ namespace Calendar.Controllers
                     return NotFound($"Could not found Topic with id={myEvent.EventId}");
                 }
             }
-
             return NoContent();
-        }
-
-        /// <summary>
-        /// Add new Event to DB
-        /// </summary>
-        /// <param name="myEvent">Event to add</param>
-        /// <returns>response status "Ok"</returns>
-        [HttpPost]
-        public async Task<ActionResult> PostEvent([FromBody] Event myEvent)
-        {
-            var newEvent = new Event();
-            newEvent.EventId = myEvent.EventId;
-            newEvent.EventName = myEvent.EventName;
-            newEvent.StartEventDateTime = Convert.ToDateTime(myEvent.StartEventDateTime);
-            newEvent.EndEventDateTime = Convert.ToDateTime(myEvent.EndEventDateTime);
-            newEvent.EventDescription = myEvent.EventDescription;
-            newEvent.IsAllDay = myEvent.IsAllDay;
-            newEvent.Repeat = myEvent.Repeat;
-            newEvent.UserID = myEvent.UserID;
-
-            _context.Events.Add(newEvent);
-            await _context.SaveChangesAsync(); 
-            return Ok();
         }
 
         /// <summary>
