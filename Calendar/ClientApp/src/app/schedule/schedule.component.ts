@@ -104,4 +104,5 @@ L10n.load({
     ]
 })
 export class ScheduleComponent {
+
 }
