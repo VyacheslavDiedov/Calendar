@@ -1,0 +1,47 @@
+@import '../../scss';
+
+.error_container {
+    position: fixed; /* or absolute */
+    top: 36%;
+    left: 38%;
+
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+
+    .error_title {
+        width: 100%;
+        margin-bottom: 56px;
+
+        font-family: Montserrat;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .error_code {
+        margin-top: 16px;
+        margin-bottom: 16px;
+        width: 100%;
+        font-family: Montserrat;
+        font-size: 150px;
+        font-weight: 1000;
+        line-height: 0;
+        text-align: right;
+    }
+
+    .error_message {
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 56px;
+        margin-bottom: 0;
+    }
+
+    .error_return_to_home_page {
+        font-family: Montserrat;
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
