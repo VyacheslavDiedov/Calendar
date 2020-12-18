@@ -35,7 +35,10 @@ import {
     YearService,
     DragAndDropService
 } from '@syncfusion/ej2-angular-schedule';
-
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DevelopmentPageComponent } from './development-page/development-page.component';
+import { EventService } from "src/service/event-api.service";
+import { EventData, EventDataManager } from "src/models/event-data";
 
 @NgModule({
     declarations: [
@@ -46,7 +49,9 @@ import {
         LoginDialogComponent,
         EditUserDialogComponent,
         FooterComponent,
-        ScheduleComponent
+        ScheduleComponent,
+        PageNotFoundComponent,
+        DevelopmentPageComponent
     ],
     imports: [
         BrowserModule,
@@ -55,7 +60,9 @@ import {
         RouterModule.forRoot([
             {path: '', redirectTo: '/home', pathMatch: 'full'},
             {path: 'home', component: HomeComponent},
-            {path: 'calendar', component: CalendarComponent}
+            {path: 'calendar', component: CalendarComponent},
+            {path: 'development', component: DevelopmentPageComponent},
+            {path: '**', component: PageNotFoundComponent}
         ]),
         MatToolbarModule,
         MatIconModule,
