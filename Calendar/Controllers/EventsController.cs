@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Calendar.DataBase;
+using Calendar.EmailService;
 using Calendar.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,6 +53,7 @@ namespace Calendar.Controllers
             newEvent.IsAllDay = myEvent.IsAllDay;
             newEvent.Repeat = myEvent.Repeat;
             newEvent.UserID = myEvent.UserID;
+            newEvent.IsNotification = true;
 
             _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();
@@ -105,19 +107,17 @@ namespace Calendar.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteEvent(int id)
         {
-            var topic = await _context.Events.FindAsync(id);
-            if (topic == null)
+            var myEvent = await _context.Events.FindAsync(id);
+            if (myEvent == null)
             {
                 return NotFound($"Could not found Topic with Id={id}");
             }
 
-            _context.Events.Remove(topic);
+            _context.Events.Remove(myEvent);
             await _context.SaveChangesAsync();
 
             return Ok();
         }
-
-
         /// <summary>
         /// Returns true if Event with Id exists id DB
         /// </summary>
@@ -127,6 +127,37 @@ namespace Calendar.Controllers
         private bool EventExists(int id)
         {
             return _context.Events.Any(e => e.EventId == id);
+        }
+
+
+        [HttpPost("Event")]
+        public async Task<ActionResult> SentNotification([FromBody] Event myEvent)
+        {
+            var userEmail = _context.Users.FirstOrDefault(u => u.UserID == myEvent.UserID)?.UserEMail;
+            if (userEmail != null)
+            {
+                var emailService = new SendEmail();
+                await emailService.SendEmailAsync(userEmail, myEvent.EventName,
+                    myEvent);
+
+                myEvent.IsNotification = false;
+                _context.Entry(myEvent).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EventExists(myEvent.EventId))
+                    {
+                        return NotFound($"Could not found Topic with id={myEvent.EventId}");
+                    }
+                }
+            }
+            return NotFound();
+
         }
 
     }

@@ -18,5 +18,6 @@ namespace Calendar.DataBase
         public bool Repeat { get; set; }
         [Required]
         public int UserID { get; set; }
+        public bool IsNotification { get; set; }
     }
 }

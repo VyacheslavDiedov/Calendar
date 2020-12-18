@@ -20,6 +20,11 @@ export class EventService {
          return this.http.post(basicUrl.apiUrl + this.url, JSON.stringify(event), {headers: myHeaders});
      }
 
+    sentEmail(event: EventData) {
+        const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.http.post(basicUrl.apiUrl + this.url + "/event", JSON.stringify(event), {headers: myHeaders});
+    }
+
     updateEvent(event: EventData) {
         const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
         return this.http.put(basicUrl.apiUrl + this.url, JSON.stringify(event), {headers: myHeaders});
