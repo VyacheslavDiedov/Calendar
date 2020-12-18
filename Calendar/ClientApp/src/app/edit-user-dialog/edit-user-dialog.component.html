@@ -1,0 +1,35 @@
+<div class="dialog_window">
+    <div class="close_window_button" mat-button [mat-dialog-close]="">
+        <mat-icon>clear</mat-icon>
+    </div>
+    <div class="dialog_container">
+        <p class="dialog_title" mat-dialog-title>Редагування користувача</p>
+
+        <div class="necessary_fields">
+            <span class="red_star">*</span>
+            <span class="">Поля обов'язкові для заповнення</span>
+        </div>
+
+        <span>Ім'я</span>
+        <span class="red_star">*</span>
+        <input type="text" [(ngModel)]="userFirstNameInput">
+
+        <span>Прізвище</span>
+        <span class="red_star">*</span>
+        <input type="text" [(ngModel)]="userLastNameInput">
+
+        <span>e-mail</span>
+        <span class="red_star">*</span>
+        <input type="text" [(ngModel)]="userEMailInput">
+
+        <span>Телефон</span>
+        <span class="red_star">*</span>
+        <input type="text" [(ngModel)]="userPhoneInput">
+
+        <div class="button_container">
+            <button class="register_button" (click)="editUser()">Редагувати</button>
+            <button class="cancel_button" mat-button [mat-dialog-close]="">Відмінити</button>
+        </div>
+
+    </div>
+</div>

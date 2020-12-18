@@ -1,0 +1,27 @@
+<mat-toolbar>
+    <div class="header_container">
+        <div class="title_container">
+            <span class="header_title">Calendar</span>
+        </div>
+        <div class="profile_button_container">
+            <span class="user_name">{{currentUser.userFirstName + " " + currentUser.userLastName}}</span>
+            <mat-icon class="profile_button" [matMenuTriggerFor]="menu">perm_identity</mat-icon>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openEditUserDialog()" routerLinkActive="active">
+                    <mat-icon>edit_outline</mat-icon>
+                    <span>Редагувати</span>
+                </button>
+                <button mat-menu-item (click)="logout()" >
+                    <mat-icon style="color: #DE363E">exit_to_app</mat-icon>
+                    <span style="color: #DE363E">Вийти</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+</mat-toolbar>
+
+<div class="handler_container"></div>
+
+<div class="syncfusion_calendar_container">
+    <app-schedule></app-schedule>
+</div>

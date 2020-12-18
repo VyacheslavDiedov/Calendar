@@ -1,0 +1,84 @@
+.dialog_window {
+    //padding: 13px; // 79px 44px 79px;
+
+    .close_window_button {
+        display: flex;
+        justify-content: flex-end;
+        cursor: pointer;
+    }
+
+    .dialog_container {
+        //padding: 29px 66px 31px 66px;
+
+        .dialog_title {
+            font-family: Roboto;
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .red_star {
+            margin-right: 5px;
+            color: #F44336;
+        }
+
+        .necessary_fields {
+            text-align: right;
+            font-size: 12px;
+        }
+
+        input {
+            width: 100%;
+            height: 48px;
+            border-radius: 4px;
+            border: 1px solid #808080;
+            box-sizing: border-box;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-bottom: 12px;
+            font-size: 24px;
+        }
+
+        .if_registered {
+            margin-top: 10px;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .if_error{
+            color: red;
+            text-align: center;
+        }
+
+        .button_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 25px;
+
+            .register_button {
+                width: 185px;
+                height: 44px;
+                border-radius: 4px;
+                background-color: #5CB85C;
+                font-family: Roboto;
+                font-size: 16px;
+                text-transform: uppercase;
+                color: #FFFFFF;
+                cursor: pointer;
+            }
+
+            .cancel_button {
+                width: 185px;
+                height: 44px;
+                border-radius: 4px;
+                border: 1px solid #333333;
+                background-color: #FFFFFF;
+                font-family: Roboto;
+                font-size: 16px;
+                text-transform: uppercase;
+                color: #333333;
+                cursor: pointer;
+            }
+        }
+    }
+}
