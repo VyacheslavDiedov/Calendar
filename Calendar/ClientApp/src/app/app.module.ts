@@ -34,7 +34,6 @@ import {
     DragAndDropService
 } from '@syncfusion/ej2-angular-schedule';
 
-
 @NgModule({
     declarations: [
         AppComponent,
