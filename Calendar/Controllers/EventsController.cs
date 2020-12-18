@@ -53,6 +53,7 @@ namespace Calendar.Controllers
             newEvent.IsAllDay = myEvent.IsAllDay;
             newEvent.Repeat = myEvent.Repeat;
             newEvent.UserID = myEvent.UserID;
+            newEvent.IsNotification = true;
 
             _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();
@@ -128,6 +129,7 @@ namespace Calendar.Controllers
             return _context.Events.Any(e => e.EventId == id);
         }
 
+
         [HttpPost("Event")]
         public async Task<ActionResult> SentNotification([FromBody] Event myEvent)
         {
@@ -135,9 +137,24 @@ namespace Calendar.Controllers
             if (userEmail != null)
             {
                 var emailService = new SendEmail();
-                await emailService.SendEmailAsync(userEmail, myEvent.EventName, 
-                    myEvent.EventDescription = "Discription is absent");
-                return Ok();
+                await emailService.SendEmailAsync(userEmail, myEvent.EventName,
+                    myEvent);
+
+                myEvent.IsNotification = false;
+                _context.Entry(myEvent).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EventExists(myEvent.EventId))
+                    {
+                        return NotFound($"Could not found Topic with id={myEvent.EventId}");
+                    }
+                }
             }
             return NotFound();
 

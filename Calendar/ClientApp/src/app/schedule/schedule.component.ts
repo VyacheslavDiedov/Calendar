@@ -14,7 +14,6 @@ import {
 } from '@syncfusion/ej2-angular-schedule';
 import { EventService } from "src/service/event-api.service";
 import { EventData, EventDataManager } from "src/models/event-data";
-import {timeout} from 'rxjs/operators';
 
 @Component({
     selector: 'app-schedule',
@@ -83,6 +82,7 @@ export class ScheduleComponent implements OnInit{
                     this.currentUserId
                 );
                 this.serv.createEvent(this.event).subscribe();
+                this.backgroundTask();
                 break;
             }
             case 'eventChange': {
@@ -97,10 +97,12 @@ export class ScheduleComponent implements OnInit{
                     this.currentUserId
                 );
                 this.serv.updateEvent(this.event).subscribe();
+                this.backgroundTask();
                 break;
             }
             case 'eventRemove': {
                 this.serv.deleteEvent(e.deletedRecords[0].Id).subscribe();
+                this.backgroundTask();
                 break;
             }
         }
@@ -117,8 +119,6 @@ export class ScheduleComponent implements OnInit{
         this.events = data.filter(startTime => new Date(startTime.startEventDateTime) > new Date()
                                 && (+new Date(startTime.startEventDateTime) - +new Date()) <= this.dayInMilliseconds);
         this.events.sort((x, y) => +new Date(x.startEventDateTime) - +new Date(y.startEventDateTime));
-
-        //TODO sent two times
             console.log(this.events);
             console.log(this.events.map( s => (+new Date(s.startEventDateTime) - +new Date())))
             for(let i = 0; i < this.events.length; i++){
