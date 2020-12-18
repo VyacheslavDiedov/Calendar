@@ -135,7 +135,8 @@ namespace Calendar.Controllers
             if (userEmail != null)
             {
                 var emailService = new SendEmail();
-                await emailService.SendEmailAsync(userEmail, myEvent.EventName, myEvent.EventDescription);
+                await emailService.SendEmailAsync(userEmail, myEvent.EventName, 
+                    myEvent.EventDescription = "Discription is absent");
                 return Ok();
             }
             return NotFound();
