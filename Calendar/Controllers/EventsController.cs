@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Calendar.EmailService;
 using Calendar.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Calendar.DataBase;
@@ -128,36 +127,5 @@ namespace Calendar.Controllers
         {
             return _context.Events.Any(e => e.EventId == id);
         }
-
-
-        [HttpPost("Event")]
-        public async Task<ActionResult> SentNotification([FromBody] Event myEvent)
-        {
-            var userEmail = _context.Users.FirstOrDefault(u => u.UserID == myEvent.UserID)?.UserEMail;
-            if (userEmail != null)
-            {
-                var emailService = new SendEmail();
-                await emailService.SendEmailAsync(userEmail, myEvent.EventName, myEvent);
-
-                myEvent.IsNotification = false;
-                _context.Entry(myEvent).State = EntityState.Modified;
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return Ok();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventExists(myEvent.EventId))
-                    {
-                        return NotFound($"Could not found Topic with id={myEvent.EventId}");
-                    }
-                }
-            }
-            return NotFound();
-
-        }
-
     }
 }

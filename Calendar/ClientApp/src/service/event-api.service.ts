@@ -10,19 +10,14 @@ export class EventService {
 
     constructor(private http: HttpClient) { }
 
-     getEvents(userID: number) {
+    getEvents(userID: number) {
          return this.http.get(basicUrl.apiUrl + this.url + '/' + userID);
-     }
+    }
 
 
     createEvent(event: EventData) {
          const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
          return this.http.post(basicUrl.apiUrl + this.url, JSON.stringify(event), {headers: myHeaders});
-     }
-
-    sentEmail(event: EventData) {
-        //const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-        //return this.http.post(basicUrl.apiUrl + this.url + "/event", JSON.stringify(event), {headers: myHeaders});
     }
 
     updateEvent(event: EventData) {

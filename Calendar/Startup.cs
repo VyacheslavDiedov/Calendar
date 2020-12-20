@@ -98,6 +98,7 @@ namespace Calendar
                 }
             });
 
+            // E-mail event sender service
             Scheduler(app);
         }
 
@@ -113,6 +114,8 @@ namespace Calendar
                 }
             }
         }
+
+        #region E-mail event sender service
 
         private static async void Scheduler(IApplicationBuilder app)
         {
@@ -144,7 +147,7 @@ namespace Calendar
             }
         }
 
-        private static void EventHandler(List<User> users, List<Event> events)
+        private static async void EventHandler(List<User> users, List<Event> events)
         {
             DateTime currentDateTime = DateTime.Now.AddMinutes(10);
 
@@ -159,37 +162,40 @@ namespace Calendar
 
                         if (user != null)
                         {
-                            MailSender(user, userEvent);
+                            await MailSender(user, userEvent);
                         }
                     }
                 }
             }
         }
 
-        private static void MailSender(User user, Event userEvent)
+        private static async Task MailSender(User user, Event userEvent)
         {
             var emailMessage = new MimeMessage();
 
             emailMessage.From.Add(new MailboxAddress("Calendar", "my_forum_register@ukr.net"));
             emailMessage.To.Add(new MailboxAddress("", user.UserEMail));
-            var description = userEvent.EventDescription == null ? $"<p>{userEvent.EventDescription}</p>" : null;
+            var description = userEvent.EventDescription != null ? $"<p>{userEvent.EventDescription}</p>" : null;
+            emailMessage.Subject = userEvent.EventName;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
                 Text = $"<div>" +
-                       $"<p>Сьогодні о {userEvent.StartEventDateTime.TimeOfDay} у вас заплановано {userEvent.EventName}</p>" +
-                 description +
-                $"<p>Гарного дня!</p>" +
+                            $"<p>Сьогодні о {userEvent.StartEventDateTime.TimeOfDay} у вас заплановано {userEvent.EventName}</p>" +
+                            description +
+                            $"<p>Гарного дня!</p>" +
                        "</div>"
             };
 
             using (var client = new SmtpClient())
             {
-                client.ConnectAsync("smtp.ukr.net", 465, true);
-                client.AuthenticateAsync("my_forum_register@ukr.net", "f9nvhpPRcvaQZkE1");
-                client.SendAsync(emailMessage);
+                await client.ConnectAsync("smtp.ukr.net", 465, true);
+                await client.AuthenticateAsync("my_forum_register@ukr.net", "f9nvhpPRcvaQZkE1");
+                await client.SendAsync(emailMessage);
 
-                client.DisconnectAsync(true);
+                await client.DisconnectAsync(true);
             }
         }
+
+        #endregion
     }
 }
