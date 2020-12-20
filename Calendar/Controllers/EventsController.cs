@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Calendar.DataBase;
 using Calendar.EmailService;
 using Calendar.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Calendar.DataBase;
 
 namespace Calendar.Controllers
 {
@@ -137,8 +137,7 @@ namespace Calendar.Controllers
             if (userEmail != null)
             {
                 var emailService = new SendEmail();
-                await emailService.SendEmailAsync(userEmail, myEvent.EventName,
-                    myEvent);
+                await emailService.SendEmailAsync(userEmail, myEvent.EventName, myEvent);
 
                 myEvent.IsNotification = false;
                 _context.Entry(myEvent).State = EntityState.Modified;

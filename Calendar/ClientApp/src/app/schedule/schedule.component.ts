@@ -124,7 +124,7 @@ export class ScheduleComponent implements OnInit{
     };
     ngOnInit(): void {
         this.loadEvents();
-        this.backgroundTask();
+        //this.backgroundTask();
     };
 
     //public selectedDate: Date = new Date();
@@ -157,7 +157,7 @@ export class ScheduleComponent implements OnInit{
                     JSON.parse(localStorage.getItem("currentUser")).userID
                 );
                 this.serv.createEvent(this.event).subscribe();
-                this.backgroundTask();
+                //this.backgroundTask();
                 break;
             }
             case 'eventChange': {
@@ -172,47 +172,47 @@ export class ScheduleComponent implements OnInit{
                     this.currentUserId
                 );
                 this.serv.updateEvent(this.event).subscribe();
-                this.backgroundTask();
+                //this.backgroundTask();
                 break;
             }
             case 'eventRemove': {
                 this.serv.deleteEvent(e.deletedRecords[0].Id).subscribe();
-                this.backgroundTask();
+                //this.backgroundTask();
                 break;
             }
         }
     }
 
-    public sentEmail(e) {
-        this.serv.sentEmail(e).subscribe();
-    }
+    //public sentEmail(e) {
+    //    this.serv.sentEmail(e).subscribe();
+    //}
 
-    public checkEvent() {
-        const minuteInMilliseconds: number = 60000;
-    this.serv.getEvents(this.currentUserId).subscribe(
-    (data: EventData[]) => {
-        this.events = data.filter(startTime => new Date(startTime.startEventDateTime) > new Date()
-                                && (+new Date(startTime.startEventDateTime) - +new Date()) <= this.dayInMilliseconds);
-        this.events.sort((x, y) => +new Date(x.startEventDateTime) - +new Date(y.startEventDateTime));
-            console.log(this.events);
-            console.log(this.events.map( s => (+new Date(s.startEventDateTime) - +new Date())))
-            for(let i = 0; i < this.events.length; i++){
-                setTimeout(
-                    () =>{
-                            this.sentEmail(this.events[i]);
-                    }, (+new Date(this.events[i].startEventDateTime) - +new Date())
-                                - (minuteInMilliseconds * 15)
-                )
-            }
+    //public checkEvent() {
+    //    const minuteInMilliseconds: number = 60000;
+    //this.serv.getEvents(this.currentUserId).subscribe(
+    //(data: EventData[]) => {
+    //    this.events = data.filter(startTime => new Date(startTime.startEventDateTime) > new Date()
+    //                            && (+new Date(startTime.startEventDateTime) - +new Date()) <= this.dayInMilliseconds);
+    //    this.events.sort((x, y) => +new Date(x.startEventDateTime) - +new Date(y.startEventDateTime));
+    //        console.log(this.events);
+    //        console.log(this.events.map( s => (+new Date(s.startEventDateTime) - +new Date())))
+    //        for(let i = 0; i < this.events.length; i++){
+    //            setTimeout(
+    //                () =>{
+    //                        this.sentEmail(this.events[i]);
+    //                }, (+new Date(this.events[i].startEventDateTime) - +new Date())
+    //                            - (minuteInMilliseconds * 15)
+    //            )
+    //        }
 
-            });
-    }
+    //        });
+    //}
 
-    public backgroundTask(){
-        this.checkEvent();
+    //public backgroundTask(){
+    //    this.checkEvent();
 
-        setInterval(() => {
-            this.checkEvent()
-        }, this.dayInMilliseconds);
-    }
+    //    setInterval(() => {
+    //        this.checkEvent()
+    //    }, this.dayInMilliseconds);
+    //}
 }

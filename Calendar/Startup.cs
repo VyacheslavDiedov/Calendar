@@ -1,4 +1,5 @@
 using Calendar.DataBase;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -7,7 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MimeKit;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Calendar
 {
@@ -91,6 +97,8 @@ namespace Calendar
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            Scheduler(app);
         }
 
         private static void UpdateDatabase(IApplicationBuilder app)
@@ -103,6 +111,84 @@ namespace Calendar
                 {
                     context.Database.Migrate();
                 }
+            }
+        }
+
+        private static async void Scheduler(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<CalendarContext>())
+                {
+                    while (true)
+                    {
+                        DateTime currentDay = DateTime.Now;
+
+                        List<User> users = await context.Users.ToListAsync();
+                        List<Event> events = await context.Events.Where(e => e.StartEventDateTime.Year == currentDay.Year
+                                                                                && e.StartEventDateTime.Month == currentDay.Month
+                                                                                && e.StartEventDateTime.Day == currentDay.Day
+                                                                                && e.StartEventDateTime.Hour >= currentDay.Hour)
+                                                                 .ToListAsync();
+
+                        if (users != null && users.Any() && events != null && events.Any())
+                        {
+                            EventHandler(users, events);
+                        }
+
+                        await Task.Delay(60000);
+                    }
+                }
+            }
+        }
+
+        private static void EventHandler(List<User> users, List<Event> events)
+        {
+            DateTime currentDateTime = DateTime.Now.AddMinutes(10);
+
+            if (events != null && events.Any())
+            {
+                foreach (var userEvent in events)
+                {
+                    if (userEvent.StartEventDateTime.Hour == currentDateTime.Hour 
+                        && userEvent.StartEventDateTime.Minute == currentDateTime.Minute)
+                    {
+                        User user = users.Where(u => u.UserID == userEvent.UserID).FirstOrDefault();
+
+                        if (user != null)
+                        {
+                            MailSender(user, userEvent);
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void MailSender(User user, Event userEvent)
+        {
+            var emailMessage = new MimeMessage();
+
+            emailMessage.From.Add(new MailboxAddress("Calendar", "my_forum_register@ukr.net"));
+            emailMessage.To.Add(new MailboxAddress("", user.UserEMail));
+            var description = userEvent.EventDescription == null ? $"<p>{userEvent.EventDescription}</p>" : null;
+            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            {
+                Text = $"<div>" +
+                       $"<p>Сьогодні о {userEvent.StartEventDateTime.TimeOfDay} у вас заплановано {userEvent.EventName}</p>" +
+                 description +
+                $"<p>Гарного дня!</p>" +
+                       "</div>"
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.ConnectAsync("smtp.ukr.net", 465, true);
+                client.AuthenticateAsync("my_forum_register@ukr.net", "f9nvhpPRcvaQZkE1");
+                client.SendAsync(emailMessage);
+
+                client.DisconnectAsync(true);
             }
         }
     }
